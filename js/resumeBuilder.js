@@ -12,15 +12,14 @@ $("#header").prepend(formattedName);
 var bio = {
   "name" : "Jenny Crawshaw",
   "role" : "Web Devleoper",
-  "contact" : [
-    {
+  "contacts" : {
     "email": "jennycrawshaw@gmail.com",
     "mobile": "(727) 967-2089",
+    "location": "New Port Richey, FL 34655",
     "linkedin": "https://www.linkedin.com/in/jennifercrawshaw",
     "github": "https://github.com/Jcrawshaw"
-    }
-    ],
-  "welcome" : "Hello! I am a web developer!",
+    },
+  "welcomeMessage" : "Hello! I am a web developer!",
   "picture" : "images/Jennyclose.jpg",
   "skills" :  ["Ruby", "Rails", "HTML5", "CSS", "Javascript" ]
 }
@@ -50,12 +49,12 @@ var education = {
   "schools": [
     {
       "name": "Bloc",
-      "city": "San Francisco, CA, US",
+      "location": "San Francisco, CA, US",
       "studies": "Web Development"
     },
     {
       "name": "Kennesaw State University",
-      "city": "Kennesaw, GA, US",
+      "location": "Kennesaw, GA, US",
       "studies": "Undergraduate"
     }
   ],
@@ -75,13 +74,19 @@ var projects = {
       "title": "TrailRunFinder",
       "dates": "4/2015",
       "description": "A web application created for trail runners to search for U.S. running trails, and add their own trails to the database.",
-      "image": "http://www.trailrunfinder.com"
+      "images": ["images/croomsign.jpg"]
     },
     {
       "title": "Blocmarks",
       "dates": "1/2015 - 3/2015",
       "description": "A social bookmarking application utilizing email integration.",
-      "image": "https://jenny-blocmarks.herokuapp.com/"
+      "images": ["images/bookmark.png"]
+    },
+    {
+      "title": "Trinity Trail Runners",
+      "dates": "3/2014 - 6/2014",
+      "description": "A website for a local running group featuring their photo galleries.",
+      "images": ["images/TTRlogo.png"]
     }
   ]
 }
@@ -127,3 +132,50 @@ for (job in work.jobs) {
 }
 
 displayWork();
+
+$(document).click(function(loc) {
+  var x = loc.pageX;
+  var y = loc.pageY; 
+  logClicks(x,y); 
+});
+
+console.log(name);
+
+function inName(name) {
+  name = bio.name.trim().split(" ");
+  console.log(name);
+  name[1] = name[1].toUpperCase();
+  name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
+  
+  return name[0] +" "+name[1];
+}
+
+$("#main").append(internationalizeButton);
+
+
+projects.display = function() {
+  for (project in projects.projects) {
+  $("#projects").append(HTMLprojectStart);
+
+  var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+  $(".project-entry:last").append(formattedTitle);
+
+  var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+  $(".project-entry:last").append(formattedDates);
+
+  var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+  $(".project-entry:last").append(formattedDescription);
+
+  if (projects.projects[project].images.length > 0) {
+    for (image in projects.projects[project].images) {
+      var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+      $(".project-entry:last").append(formattedImage);
+    }
+  }
+  }
+};
+projects.display();
+
+
+//Adding a map
+$("#mapDiv").append(googleMap);
