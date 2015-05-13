@@ -8,7 +8,7 @@ var formattedRole = HTMLheaderRole.replace("%data%", role);
 $("#header").prepend(formattedRole);
 $("#header").prepend(formattedName);
 
-
+//Biography Object
 var bio = {
   "name" : "Jenny Crawshaw",
   "role" : "Web Devleoper",
@@ -19,12 +19,12 @@ var bio = {
     "linkedin": "https://www.linkedin.com/in/jennifercrawshaw",
     "github": "https://github.com/Jcrawshaw"
     },
-  "welcomeMessage" : "Hello! I am a web developer!",
-  "picture" : "images/Jennyclose.jpg",
-  "skills" :  ["Ruby", "Rails", "HTML5", "CSS", "Javascript" ]
+  "welcomeMessage" : "Hello! I am a web developer in the Tampa area! I work on both the frontend or backend of websites and applications.",
+  "biopic" : "images/Jennyclose.jpg",
+  "skills" :  ["Ruby", "Rails", "HTML5", "CSS", "Bootstrap", "Javascript", "jQuery" ]
 }
 
-
+//Work Object
 var work = {
   "jobs": [
     {
@@ -44,21 +44,23 @@ var work = {
   ]
 }
   
-
+//Education Object
 var education = {
   "schools": [
     {
       "name": "Bloc",
       "location": "San Francisco, CA, US",
-      "studies": "Web Development"
+      "studies": "Web Development",
+      "dates": "2015"
     },
     {
       "name": "Kennesaw State University",
       "location": "Kennesaw, GA, US",
-      "studies": "Undergraduate"
+      "studies": "Undergraduate",
+      "dates": "1998"
     }
   ],
-  "online courses": [
+  "onlineCourses": [
     {
       "title": "Front End Nanodegree",
       "school": "Udacity",
@@ -68,6 +70,7 @@ var education = {
   ]
 }
 
+//Projects Object
 var projects = {
   "projects": [
     {
@@ -141,6 +144,7 @@ $(document).click(function(loc) {
 
 console.log(name);
 
+//Internationalize the Name format//
 function inName(name) {
   name = bio.name.trim().split(" ");
   console.log(name);
@@ -177,5 +181,5 @@ projects.display = function() {
 projects.display();
 
 
-//Adding a map
+//Adding google map
 $("#mapDiv").append(googleMap);
