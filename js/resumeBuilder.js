@@ -1,12 +1,4 @@
-var name = "Jenny Crawshaw";
-var role = "Web Developer";
 
-var formattedName = HTMLheaderName.replace("%data%", name);
-
-var formattedRole = HTMLheaderRole.replace("%data%", role);
-
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
 
 //Biography Object
 var bio = {
@@ -19,10 +11,42 @@ var bio = {
     "linkedin": "https://www.linkedin.com/in/jennifercrawshaw",
     "github": "https://github.com/Jcrawshaw"
     },
-  "welcomeMessage" : "Hello! I am a web developer in the Tampa area! I work on both the frontend or backend of websites and applications.",
+  "welcomeMessage" : "Hello! I am a web developer in the Tampa area! I work on both the frontend or backend of websites and applications using my background in Ruby on Rails, HTML, CSS and JavaScript. I enjoy learning, and am actively adding more knowlegde to my technical skill set.",
   "biopic" : "images/Jennyclose.jpg",
-  "skills" :  ["Ruby", "Rails", "HTML5", "CSS", "Bootstrap", "Javascript", "jQuery" ]
-}
+  "skills" :  ["Ruby", "Rails", "HTML5", "CSS", "Bootstrap", "Javascript", "jQuery" ],
+  "display": function() {
+    //display Header info
+    var formattedHeaderRole = HTMLheaderRole.replace("%data%", bio.role);
+    $("#header").prepend(formattedHeaderRole);
+    var formattedHeaderName = HTMLheaderName.replace("%data%", bio.name);
+    $("#header").prepend(formattedHeaderName);
+    var formattedbioPic = HTMLbioPic.replace("%data%", bio.biopic);
+    $("#header").append(formattedbioPic);
+    var formattedwelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+    $("#header").append(formattedwelcomeMessage);
+
+    //display header and footer contact info
+    var formattedmobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+    $("#topContacts").append(formattedmobile);
+    $("#footerContacts").append(formattedmobile);
+    var formattedemail = HTMLemail.replace("%data%", bio.contacts.email);
+    $("#topContacts").append(formattedemail);
+    $("#footerContacts").append(formattedemail);
+    var formattedgithub = HTMLgithub.replace("%data%", bio.contacts.github);
+    $("#topContacts").append(formattedgithub);
+    $("#footerContacts").append(formattedgithub);
+    var formattedlinkedin = HTMLlinkedin.replace("%data%", bio.contacts.linkedin);
+    $("#topContacts").append(formattedlinkedin);
+    $("#footerContacts").append(formattedlinkedin);
+    var formattedlocation = HTMLlocation.replace("%data%", bio.contacts.location);
+    $("#topContacts").append(formattedlocation);
+
+     $("#header").append(HTMLskillsStart);
+      for (skill in bio.skills){
+          $("#skills").append(HTMLskills.replace("%data%", bio.skills[skill]));
+      }
+  }
+};
 
 //Work Object
 var work = {
@@ -92,8 +116,46 @@ var education = {
       "dates": "4/2015",
       "url": "https://udacity.com/nanodegree"
     }
-  ]
-}
+  ],
+  "display": function() {
+
+      for (school in education.schools) {
+        // create new div for education
+        $("#education").append(HTMLschoolStart);
+
+        // School info
+        var formattedSchoolName =  HTMLschoolName.replace("%data%", education.schools[school].name);
+        $(".education-entry:last").append(formattedSchoolName);
+
+        var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
+        $(".education-entry:last").append(formattedSchoolLocation);
+
+        var formattedschoolDegree = HTMLschoolDegree.replace("%data%", education.schools[school].studies);
+        $(".education-entry:last").append(formattedschoolDegree);
+
+        var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+        $(".education-entry:last").append(formattedSchoolDates);
+      };
+
+
+      for (onlineCourse in education.onlineCourses) {
+        //create new div for online education
+        $(".education-entry:last").append(HTMLonlineClasses);
+        // Online class info
+        var formattedonlineTitle =  HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineCourse].title);
+        $(".education-entry:last").append(formattedonlineTitle);
+
+        var formattedonlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineCourse].school);
+        $(".education-entry:last").append(formattedonlineSchool);
+
+        var formattedonlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineCourse].dates);
+        $(".education-entry:last").append(formattedonlineDates);
+
+        var formattedonlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[onlineCourse].url);
+        $(".education-entry:last").append(formattedonlineURL);
+      }
+    }
+};
 
 //Projects Object
 var projects = {
@@ -141,28 +203,15 @@ var projects = {
 };
 
 
+//Call all functions to display data
 
-
-if (bio.skills.length > 0){
-
-  $("#header").append(HTMLskillsStart);
-
-  var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-  $("#skills").append(formattedSkill);
-  formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-  $("#skills").append(formattedSkill);
-  formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-  $("#skills").append(formattedSkill);
-  formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
-  $("#skills").append(formattedSkill);
-
-}
-
-
-
+bio.display();
 work.display();
 projects.display();
+education.display();
 
+
+//Click location information to the console
 $(document).click(function(loc) {
   var x = loc.pageX;
   var y = loc.pageY; 
