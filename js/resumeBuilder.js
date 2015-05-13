@@ -41,8 +41,33 @@ var work = {
       "dates": "March 2015 through present",
       "description": "Developed a web application and database using Ruby on Rails. Designed the U/X to present a social sharing application using HTML, CSS and Bootstrap. Built web presence through social media marketing."
     }
-  ]
-}
+  ],
+  "display": function() {
+    //if (work.jobs) {
+
+      for (job in work.jobs) {
+        // create new div for work experience
+        $("#workExperience").append(HTMLworkStart);
+
+        // employer and title info
+        var formattedEmployer =  HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+        var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+        var formattedEmployerTitle = formattedEmployer + formattedTitle;
+
+        $(".work-entry:last").append(formattedEmployerTitle);
+
+        var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
+        $(".work-entry:last").append(formattedDates);
+
+        var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+        $(".work-entry:last").append(formattedDescription);
+
+        var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+        $(".work-entry:last").append(formattedLocation);
+      }
+    //}
+  }
+};
   
 //Education Object
 var education = {
@@ -91,8 +116,30 @@ var projects = {
       "description": "A website for a local running group featuring their photo galleries.",
       "images": ["images/TTRlogo.png"]
     }
-  ]
-}
+  ],
+  "display": function() {
+    for (project in projects.projects) {
+      $("#projects").append(HTMLprojectStart);
+
+      var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+      $(".project-entry:last").append(formattedTitle);
+
+      var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+      $(".project-entry:last").append(formattedDates);
+
+      var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+      $(".project-entry:last").append(formattedDescription);
+
+      if (projects.projects[project].images.length > 0) {
+        for (image in projects.projects[project].images) {
+          var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+          $(".project-entry:last").append(formattedImage);
+        }
+      }
+    }
+  }
+};
+
 
 
 
@@ -111,30 +158,10 @@ if (bio.skills.length > 0){
 
 }
 
-function displayWork() {
-for (job in work.jobs) {
-  // create new div for work experience
-  $("#workExperience").append(HTMLworkStart);
 
-  // employer and title info
-  var formattedEmployer =  HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-  var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-  var formattedEmployerTitle = formattedEmployer + formattedTitle;
 
-  $(".work-entry:last").append(formattedEmployerTitle);
-
-  var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
-  $(".work-entry:last").append(formattedDates);
-
-  var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-  $(".work-entry:last").append(formattedDescription);
-
-  var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-  $(".work-entry:last").append(formattedLocation);
-}
-}
-
-displayWork();
+work.display();
+projects.display();
 
 $(document).click(function(loc) {
   var x = loc.pageX;
@@ -155,30 +182,6 @@ function inName(name) {
 }
 
 $("#main").append(internationalizeButton);
-
-
-projects.display = function() {
-  for (project in projects.projects) {
-  $("#projects").append(HTMLprojectStart);
-
-  var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
-  $(".project-entry:last").append(formattedTitle);
-
-  var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
-  $(".project-entry:last").append(formattedDates);
-
-  var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
-  $(".project-entry:last").append(formattedDescription);
-
-  if (projects.projects[project].images.length > 0) {
-    for (image in projects.projects[project].images) {
-      var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
-      $(".project-entry:last").append(formattedImage);
-    }
-  }
-  }
-};
-projects.display();
 
 
 //Adding google map
