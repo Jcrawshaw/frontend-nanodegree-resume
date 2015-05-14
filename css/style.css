@@ -81,9 +81,9 @@ a {
 
 .welcome-message {
   font-style: italic;
-  font-size: 18px;
+  font-size: 25px;
   color: #F3F3F3;
-  line-height: 28px;
+  line-height: 35px;
 }
 
 #skillsH3 {
@@ -116,7 +116,8 @@ a {
 
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  /*background-color: #484848;*/
+  background-image: url('../images/brickcover.jpg');
 }
 
 .flex-box {
